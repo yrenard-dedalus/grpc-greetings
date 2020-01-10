@@ -41,7 +41,7 @@ metadata:
     deploymentConfig: grpc-greetings-client
     app: test-grpc
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     deploymentConfig: grpc-greetings-client
   strategy:
