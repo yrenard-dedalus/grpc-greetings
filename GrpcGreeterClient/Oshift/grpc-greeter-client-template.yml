@@ -2,13 +2,13 @@
 kind: BuildConfig
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: grpc-greetings-client
   labels:
     app: test-grpc
 spec:
   source:
     type: Git
-    contextDir: GrpcGreeter/
+    contextDir: GrpcGreeterClient/
     git:
       uri: https://github.com/yrenard-dedalus/grpc-greetings.git
   strategy:
@@ -18,7 +18,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: grpc-greetings:0.1
+      name: grpc-greetings-client:0.1
   triggers:
   - type: ConfigChang
 
@@ -26,7 +26,7 @@ spec:
 kind: ImageStream
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: grpc-greetings-client
   labels:
     app: test-grpc
 spec:
@@ -36,14 +36,14 @@ spec:
 kind: DeploymentConfig
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: grpc-greetings-client
   labels:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: grpc-greetings-client
     app: test-grpc
 spec:
   replicas: 2
   selector:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: grpc-greetings-client
   strategy:
     type: Rolling
     rollingParams:
@@ -54,13 +54,13 @@ spec:
   template:
     metadata:
       labels:
-        deploymentConfig: grpc-greetings
+        deploymentConfig: grpc-greetings-client
         app: test-grpc
-      name: grpc-greetings
+      name: grpc-greetings-client
     spec:
       containers:
-      - name: grpc-greetings
-        image: grpc-greetings:0.1
+      - name: grpc-greetings-client
+        image: grpc-greetings-client:0.1
         imagePullPolicy: Always
         ports: 
         - name: grpc
@@ -72,16 +72,16 @@ spec:
     imageChangeParams:
       automatic: true
       containerNames:
-      - grpc-greetings
+      - grpc-greetings-client
       from:
         kind: ImageStreamTag
-        name: grpc-greetings:0.1
+        name: grpc-greetings-client:0.1
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: grpc-greetings-client
   labels:
     app: test-grpc
 spec:
@@ -91,4 +91,4 @@ spec:
     port: 5001
     targetPort: 5001
   selector:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: grpc-greetings-client
