@@ -1,7 +1,3 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
-WORKDIR /app
-EXPOSE 5001
-
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
 COPY ["GrpcGreeter.csproj", ""]
@@ -13,7 +9,8 @@ RUN dotnet build "GrpcGreeter.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "GrpcGreeter.csproj" -c Release -o /app/publish
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+EXPOSE 5001
 ENTRYPOINT ["dotnet", "GrpcGreeter.dll"]
