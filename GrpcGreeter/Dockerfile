@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["GrpcGreeter.csproj", ""]
-RUN dotnet restore "./GrpcGreeter.csproj"
-COPY . .
+COPY GrpcGreeter.csproj GrpcGreeter.csproj
+RUN dotnet restore "GrpcGreeter.csproj"
 RUN dotnet build "GrpcGreeter.csproj" -c Release -o /app/build
 RUN dotnet publish "GrpcGreeter.csproj" -c Release -o /app/publish
 
