@@ -21,7 +21,7 @@ namespace GrpcGreeterClient
             var httpClient = new HttpClient(httpClientHandler);
 
             // The port number(5001) must match the port of the gRPC server.
-            using var channel = GrpcChannel.ForAddress("http://grpc-greeter:5001", new GrpcChannelOptions { HttpClient = httpClient });
+            using var channel = GrpcChannel.ForAddress("http://grpc-greetings:5001", new GrpcChannelOptions { HttpClient = httpClient });
             var client = new Greeter.GreeterClient(channel);
             var reply = await client.SayHelloAsync(
                               new HelloRequest { Name = "GreeterClient" });
