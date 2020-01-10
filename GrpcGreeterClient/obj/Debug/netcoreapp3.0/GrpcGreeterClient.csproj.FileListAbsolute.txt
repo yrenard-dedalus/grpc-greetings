@@ -1,0 +1,17 @@
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.exe
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.csprojAssemblyReference.cache
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.AssemblyInfoInputs.cache
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.AssemblyInfo.cs
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\Grpc.Core.Api.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\Grpc.Net.Client.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\Grpc.Net.Common.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.csproj.CopyComplete
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.deps.json
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.runtimeconfig.json
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.runtimeconfig.dev.json
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\GrpcGreeterClient.pdb
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\bin\Debug\netcoreapp3.0\Google.Protobuf.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.dll
+C:\Users\yrenard\Poc_ais\GrpcGreeterClient\obj\Debug\netcoreapp3.0\GrpcGreeterClient.pdb
