@@ -9,6 +9,6 @@ RUN dotnet publish "GrpcGreeter.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 EXPOSE 5001
 ENTRYPOINT ["dotnet", "GrpcGreeter.dll"]
