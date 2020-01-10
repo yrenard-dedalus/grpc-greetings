@@ -3,7 +3,6 @@ WORKDIR /src
 COPY ["GrpcGreeter.csproj", ""]
 RUN dotnet restore "./GrpcGreeter.csproj"
 COPY . .
-WORKDIR "/src/."
 RUN dotnet build "GrpcGreeter.csproj" -c Release -o /app/build
 RUN dotnet publish "GrpcGreeter.csproj" -c Release -o /app/publish
 
