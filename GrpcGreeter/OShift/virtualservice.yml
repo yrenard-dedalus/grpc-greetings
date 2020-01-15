@@ -1,0 +1,12 @@
+﻿apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grpc-greeter-virtualservice
+spec:
+  hosts:
+  - grpc-greetings.poc-istio.svc.cluster.local
+  http:
+  - name: "grpc-greeter-route"
+    route:
+    - destination:
+        host: grpc-greetings.poc-istio.svc.cluster.local
