@@ -2,7 +2,7 @@
 kind: BuildConfig
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: greeter
   labels:
     app: test-grpc
 spec:
@@ -18,7 +18,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: grpc-greetings:0.1
+      name: greeter:0.1
   triggers:
   - type: ConfigChang
 
@@ -26,7 +26,7 @@ spec:
 kind: ImageStream
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: greeter
   labels:
     app: test-grpc
 spec:
@@ -36,14 +36,14 @@ spec:
 kind: DeploymentConfig
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: greeter
   labels:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: greeter
     app: test-grpc
 spec:
   replicas: 2
   selector:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: greeter
   strategy:
     type: Rolling
     rollingParams:
@@ -54,13 +54,13 @@ spec:
   template:
     metadata:
       labels:
-        deploymentConfig: grpc-greetings
+        deploymentConfig: greeter
         app: test-grpc
-      name: grpc-greetings
+      name: greeter
     spec:
       containers:
-      - name: grpc-greetings
-        image: grpc-greetings:0.1
+      - name: greeter
+        image: greeter:0.1
         imagePullPolicy: Always
         ports: 
         - name: grpc
@@ -72,16 +72,16 @@ spec:
     imageChangeParams:
       automatic: true
       containerNames:
-      - grpc-greetings
+      - greeter
       from:
         kind: ImageStreamTag
-        name: grpc-greetings:0.1
+        name: greeter:0.1
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: grpc-greetings
+  name: greeter
   labels:
     app: test-grpc
 spec:
@@ -91,4 +91,4 @@ spec:
     port: 5001
     targetPort: 5001
   selector:
-    deploymentConfig: grpc-greetings
+    deploymentConfig: greeter

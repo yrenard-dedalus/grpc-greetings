@@ -1,9 +1,9 @@
 ﻿apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: grpc-greeter-dest-rule
+  name: greeter
 spec:
-  host: grpc-greetings.poc-istio.svc.cluster.local
+  host: greeter
   trafficPolicy:
     loadBalancer:
       simple: ROUND_ROBIN
