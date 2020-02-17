@@ -2,23 +2,24 @@
 kind: BuildConfig
 apiVersion: v1
 metadata:
-  name: greeter-client
+  name: client-greeter
   labels:
-    app: test-grpc
+    app: greeter-grpc
+    version: 0.1
+    service: client-greeter
 spec:
   source:
     type: Git
-    contextDir: GrpcGreeterClient/
     git:
       uri: https://github.com/yrenard-dedalus/grpc-greetings.git
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfilePath: Dockerfile
+      dockerfilePath: ./Dockerfiles/client-greeter.Dockerfile
   output:
     to:
       kind: ImageStreamTag
-      name: greeter-client:0.1
+      name: client-greeter:0.1
   triggers:
   - type: ConfigChang
 
@@ -26,9 +27,11 @@ spec:
 kind: ImageStream
 apiVersion: v1
 metadata:
-  name: greeter-client
+  name: client-greeter
   labels:
-    app: test-grpc
+    app: greeter-grpc
+    version: 0.1
+    service: client-greeter
 spec:
   tags:
     - name: "0.1"
@@ -36,14 +39,16 @@ spec:
 kind: DeploymentConfig
 apiVersion: v1
 metadata:
-  name: greeter-client
+  name: client-greeter
   labels:
-    deploymentConfig: greeter-client
-    app: test-grpc
+    deploymentConfig: client-greeter
+    app: greeter-grpc
+    version: 0.1
+    service: client-greeter
 spec:
   replicas: 1
   selector:
-    deploymentConfig: greeter-client
+    deploymentConfig: client-greeter
   strategy:
     type: Rolling
     rollingParams:
@@ -54,13 +59,15 @@ spec:
   template:
     metadata:
       labels:
-        deploymentConfig: greeter-client
-        app: test-grpc
-      name: greeter-client
+        deploymentConfig: client-greeter
+        app: greeter-grpc
+        version: 0.1
+        service: client-greeter
+      name: client-greeter
     spec:
       containers:
-      - name: greeter-client
-        image: greeter-client:0.1
+      - name: client-greeter
+        image: client-greeter:0.1
         imagePullPolicy: Always
         ports: 
         - name: grpc
@@ -72,23 +79,24 @@ spec:
     imageChangeParams:
       automatic: true
       containerNames:
-      - greeter-client
+      - client-greeter
       from:
         kind: ImageStreamTag
-        name: greeter-client:0.1
+        name: client-greeter:0.1
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: greeter-client
+  name: client-greeter
   labels:
-    app: test-grpc
+    app: greeter-grpc
+    version: 0.1
+    service: client-greeter
 spec:
-  clusterIP: None
   ports:
   - name: grpc
     port: 5001
     targetPort: 5001
   selector:
-    deploymentConfig: greeter-client
+    deploymentConfig: client-greeter

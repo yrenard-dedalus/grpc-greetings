@@ -1,0 +1,102 @@
+﻿---
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: greeter
+  labels:
+    app: greeter-grpc
+    version: 0.1
+    service: greeter
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/yrenard-dedalus/grpc-greetings.git
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: ./Dockerfiles/greeter.Dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: greeter:0.1
+  triggers:
+  - type: ConfigChang
+
+---
+kind: ImageStream
+apiVersion: v1
+metadata:
+  name: greeter
+  labels:
+    app: greeter-grpc
+    version: 0.1
+    service: greeter
+spec:
+  tags:
+    - name: "0.1"
+---
+kind: DeploymentConfig
+apiVersion: v1
+metadata:
+  name: greeter
+  labels:
+    deploymentConfig: greeter
+    app: greeter-grpc
+    version: 0.1
+    service: greeter
+spec:
+  replicas: 2
+  selector:
+    deploymentConfig: greeter
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 120
+      maxUnavailable: "10%"
+  template:
+    metadata:
+      labels:
+        deploymentConfig: greeter
+        app: greeter-grpc
+        version: 0.1
+        service: greeter
+      name: greeter
+    spec:
+      containers:
+      - name: greeter
+        image: greeter:0.1
+        imagePullPolicy: Always
+        ports: 
+        - name: grpc
+          containerPort: 5001
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+  triggers:
+  - type: ImageChange
+    imageChangeParams:
+      automatic: true
+      containerNames:
+      - greeter
+      from:
+        kind: ImageStreamTag
+        name: greeter:0.1
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: greeter
+  labels:
+    app: greeter-grpc
+    version: 0.1
+    service: greeter
+spec:
+  ports:
+  - name: grpc
+    port: 5001
+    targetPort: 5001
+  selector:
+    deploymentConfig: greeter
