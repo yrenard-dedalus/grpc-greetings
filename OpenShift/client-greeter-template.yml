@@ -5,7 +5,7 @@ metadata:
   name: client-greeter
   labels:
     app: greeter-grpc
-    version: 0.1
+    version: "0.1"
     service: client-greeter
 spec:
   source:
@@ -30,7 +30,7 @@ metadata:
   name: client-greeter
   labels:
     app: greeter-grpc
-    version: 0.1
+    version: "0.1"
     service: client-greeter
 spec:
   tags:
@@ -43,7 +43,7 @@ metadata:
   labels:
     deploymentConfig: client-greeter
     app: greeter-grpc
-    version: 0.1
+    version: "0.1"
     service: client-greeter
 spec:
   replicas: 1
@@ -61,7 +61,7 @@ spec:
       labels:
         deploymentConfig: client-greeter
         app: greeter-grpc
-        version: 0.1
+        version: "0.1"
         service: client-greeter
       name: client-greeter
     spec:
@@ -91,7 +91,7 @@ metadata:
   name: client-greeter
   labels:
     app: greeter-grpc
-    version: 0.1
+    version: "0.1"
     service: client-greeter
 spec:
   ports:
