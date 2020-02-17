@@ -21,7 +21,7 @@ spec:
       kind: ImageStreamTag
       name: greeter:0.1
   triggers:
-  - type: ConfigChang
+  - type: ConfigChange
 
 ---
 kind: ImageStream
